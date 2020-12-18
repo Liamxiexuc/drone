@@ -1,0 +1,29 @@
+.app {
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+.title {
+    text-align: center;
+}
+
+.content {
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.input {
+    width: 350px;
+    height: 200px;
+}
+
+.btn {
+    padding: 8px 16px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    
+}
+
