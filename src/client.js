@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import useFetch from 'react-fetch-hook';
+import { addInstructions } from './utils/api';
+import axios from 'axios';
 import './client.css'
 
 
 function App() {
-    const [ instructions, setInstructions ] = useState('');
+    const [instructions, setInstructions] = useState('');
+    const [result, setResult] = useState('');
+    const [error, setError] = useState('');
     const { isLoading, data } = useFetch('http://localhost:4001');
-    if(isLoading) {
+    if (isLoading) {
         return 'Loading...';
     }
 
@@ -15,9 +19,12 @@ function App() {
         setInstructions(event.target.value);
     }
 
-    const handleSubmit = (event) => {
-        event.preventdefault();
-        
+    const handleSubmit = () => {
+        addInstructions(instructions)
+            .then(data => {
+                setResult(data);
+            })
+            .catch(err => setError(err));
     }
 
     return (
@@ -29,7 +36,7 @@ function App() {
                 </div>
                 <button onClick={handleSubmit} className="btn" type="submit">Send</button>
                 <div className="container">
-                    <div>{JSON.stringify(data)}</div>
+                    <div> {result ? JSON.stringify(result) : JSON.stringify(data)}</div>
                 </div>
             </section>
         </div>
