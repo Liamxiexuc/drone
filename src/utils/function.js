@@ -1,11 +1,3 @@
-const countChar = (string, char) => {
-    const stringArr = [...string];
-    let num = 0;
-    stringArr.forEach(i => {
-        i === char && num++;
-    })
-    return num;
-}
 
 const handleMove = (currentPosition, nextMove) => {
     const moveArr = [...nextMove];
@@ -61,17 +53,16 @@ const countBillboards = string => {
             if (box.length === 0) {
                 box.push([...nextPosition]);
             } else {
-                //if box is not empty，then validate whether the box has the photo
+                //if box is not empty，check whether the box has the photo
                 const isPositionExist = arrayHasElement(box, nextPosition);
                 !isPositionExist && box.push([...nextPosition]);
-                console.log(box, 'box3')
             }
             // Relocation
             currentPosition = nextPosition;
         }
     }
 
-    return box.length;
+    return box;
 };
 
 // Check whether an array element exist in a 2D array
@@ -91,10 +82,34 @@ const arrayHasElement = function (array, element) {
     return false;
 }
 
+const instructionsSplit = (arr) => {
+    const even = arr.filter((_item, index) => index % 2 === 0);
+    const odd = arr.filter((_item, index) => index % 2 !== 0);
+    return {
+        first: even,
+        second: odd
+    }
+}
+
+const mergeTwoDArray = (arr1, arr2) => {
+    const array = [...arr1, ...arr2];
+    const result = unique(array);
+    return result
+}
+
+const unique = (matrix) => {
+    let res = [];
+    matrix.map(item => {
+        res[item] = item;
+    })
+    return Object.values(res);
+}
+
 
 
 module.exports = {
-    countChar,
     removeDuplicateX,
-    countBillboards
+    countBillboards,
+    instructionsSplit,
+    mergeTwoDArray
 };

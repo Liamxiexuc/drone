@@ -1,7 +1,7 @@
 import { post } from './axios';
 
 export const addInstructions = (instructions) => {
-    const url = '';
+    const url = '/partOne';
     const data = {
         instructions
     };

@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
-const { countChar, removeDuplicateX, countBillboards } = require ('./utils/function');
+const { removeDuplicateX, countBillboards, instructionsSplit, mergeTwoDArray } = require('./utils/function');
 
 
 app.use(cors());
@@ -12,18 +12,40 @@ app.get('/', (req, res) => {
     res.json({ foo: 'bar' });
 });
 
-app.post('/', (req, res) => {
+app.post('/partOne', (req, res) => {
     const { instructions } = req.body;
-    const countX = countChar(instructions, 'x');
 
     //1. Remove consecutive duplicate "x" in instructions string
     let string = removeDuplicateX(instructions);
-    console.log(string);
 
     //2. Count photos
-    const result = countBillboards(string);
+    const result = countBillboards(string).length;
 
     res.json({ number: result });
+});
+
+app.post('/partTwo', (req, res) => {
+    const { instructions } = req.body;
+    let shortInstructions = removeDuplicateX(instructions);
+    const instructionsArr = [...shortInstructions];
+    const instructionsObj = instructionsSplit(instructionsArr);
+    const { first, second } = instructionsObj;
+
+    // for first drone
+    const firstString = first.join('');
+    //removeDuplicateX
+    let shortFirstString = removeDuplicateX(firstString);
+    const firstBillboardsBox = countBillboards(shortFirstString);
+
+    // for second drone
+    const secondString = second.join('');
+    //removeDuplicateX
+    let shortSecondString = removeDuplicateX(secondString);
+    const secondBillboardsBox = countBillboards(shortSecondString);
+    const result = mergeTwoDArray(firstBillboardsBox, secondBillboardsBox)
+    const num = result.length;
+
+    res.json({ number: num });
 });
 
 app.listen(4001, () => console.log(`Api started at http://localhost:4001`));
