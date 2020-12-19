@@ -1,29 +1,142 @@
-.app {
-    margin: 0 auto;
-    max-width: 800px;
+* {
+	box-sizing: border-box;
 }
 
-.title {
-    text-align: center;
+body {
+	color: #bfc1c8;
+	font-size: 16px;
+	font-family: "Roboto", sans-serif;
+	line-height: 1.5;
+}
+
+body input,
+button {
+	border: none;
+	font-size: 100%;
+	outline: none;
+}
+
+.drone__container {
+	background: #323544;
+	position: relative;
+}
+
+.container {
+    width: 100%;
+    margin: 0;
+    padding: 1.5rem;
 }
 
 .content {
-    margin-top: 80px;
+    flex-direction: column;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+}
+
+@media only screen and (min-width: 480px) {
+	.drone__container {
+		max-width: 480px;
+		margin: 3rem auto 0 auto;
+		border: 1px solid #666;
+		border-radius: 10px;
+		height: auto;
+		box-shadow: 5px 5px 10px #999;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+
+	.drone__container {
+		max-width: 800px;
+		margin: 3rem auto 0 auto;
+		border: 1px solid #666;
+		border-radius: 10px;
+		height: auto;
+        box-shadow: 5px 5px 10px #999;
+        height: auto;
+    }
+
+    .content {
+        flex-direction: row;
+    }
+
+    .container {
+        margin: 1.5rem;
+        padding: 0;
+        flex: 1;
+    }
+}
+
+
+.header__title {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+	color: #fff;
+	display: inline-block;
+	font-size: 1.2rem;
+	font-weight: 700;
+	margin: 0;
+	vertical-align: middle;
+}
+
+nav {
+    background: #323544;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.24);
+    padding: 0.8rem 0 0.8rem 1.5rem;
+    display: flex;
+}
+
+.nav__btn {
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    margin-right: 28px;
+    padding: 5px 28px 5px 28px;
+    background-color: #eee;
+    color: #999;
+}
+
+.nav__btn--active {
+    color: #fff;
+    background-color: #009ad8;
+}
+
+
+
+.content .container--lg {
+    flex: 2
 }
 
 .input {
-    width: 350px;
-    height: 200px;
+    width: 100%;
+    height: 250px;
+    background: #1e202b;
+    border-radius: 7px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
 }
 
 .btn {
     padding: 8px 16px;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 600;
-    
+    background-color: #009ad8;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.output {
+    height: 250px;
+    background: #1e202b;
+    border-radius: 7px;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    outline: none;
 }
 

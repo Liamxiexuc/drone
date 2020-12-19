@@ -7,6 +7,7 @@ import './client.css'
 
 
 function App() {
+    const [droneNumber, setDroneNumber] = useState(1);
     const [instructions, setInstructions] = useState('');
     const [result, setResult] = useState('');
     const [error, setError] = useState('');
@@ -15,12 +16,16 @@ function App() {
         return 'Loading...';
     }
 
-    const handleChange = (event) => {
+    const handleDroneNumberChange = (number) => {
+        setDroneNumber(number);
+    }
+
+    const handleInputChange = (event) => {
         setInstructions(event.target.value);
     }
 
     const handleSubmit = () => {
-        addInstructions(instructions)
+        addInstructions(droneNumber, instructions)
             .then(data => {
                 setResult(data);
             })
@@ -28,15 +33,19 @@ function App() {
     }
 
     return (
-        <div className="app">
-            <h1 className="title">Drone Demo</h1>
+        <div className="drone__container">
+            <header className="header__title">Drone Demo</header>
+            <nav>
+                <button className={`nav__btn ${droneNumber === 1 ? 'nav__btn--active' : ''}`} onClick={() => handleDroneNumberChange(1)}>Single</button>
+                <button className={`nav__btn ${droneNumber === 2 ? 'nav__btn--active' : ''}`} onClick={() => handleDroneNumberChange(2)}>Double</button>
+            </nav>
             <section className="content">
-                <div className="container">
-                    <textarea value={instructions} onChange={handleChange} className="input" type="text" placeholder="Enter your instruction here..."></textarea>
+                <div className="container container--lg">
+                    <textarea value={instructions} onChange={handleInputChange} className="input" type="text" placeholder="Enter your instruction here..."></textarea>
                 </div>
-                <button onClick={handleSubmit} className="btn" type="submit">Send</button>
+                <button onClick={handleSubmit} className="btn" type="submit">Submit ></button>
                 <div className="container">
-                    <div> {result ? JSON.stringify(result) : JSON.stringify(data)}</div>
+                    <div className="output"> {result ? JSON.stringify(result) : JSON.stringify(data)}</div>
                 </div>
             </section>
         </div>

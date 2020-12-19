@@ -21,13 +21,13 @@ app.post('/partOne', (req, res) => {
     //2. Count photos
     const result = countBillboards(string).length;
 
-    res.json({ number: result });
+    res.json( result );
 });
 
 app.post('/partTwo', (req, res) => {
     const { instructions } = req.body;
-    let shortInstructions = removeDuplicateX(instructions);
-    const instructionsArr = [...shortInstructions];
+    //let shortInstructions = removeDuplicateX(instructions);
+    const instructionsArr = [...instructions];
     const instructionsObj = instructionsSplit(instructionsArr);
     const { first, second } = instructionsObj;
 
@@ -45,7 +45,7 @@ app.post('/partTwo', (req, res) => {
     const result = mergeTwoDArray(firstBillboardsBox, secondBillboardsBox)
     const num = result.length;
 
-    res.json({ number: num });
+    res.json( num );
 });
 
 app.listen(4001, () => console.log(`Api started at http://localhost:4001`));
