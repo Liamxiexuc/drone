@@ -1,5 +1,11 @@
+const instructionsValidation = (instructions) => {
+    //remove space
+    instructions = instructions.replace(/\s*/g, "");
 
-const handleMove = (currentPosition, nextMove) => {
+}
+
+const handleMove = (position, nextMove) => {
+    const currentPosition = [...position];
     const moveArr = [...nextMove];
     moveArr.forEach(move => {
         switch (move) {
@@ -36,26 +42,26 @@ const removeDuplicateX = (string) => {
     return result.join('');
 }
 
-const countBillboards = string => {
-    const moveArr = string.split("x");
+const calculateUniqPhotos = instructions => {
+    const moveArr = instructions.split("x");
     const box = [];
     let currentPosition = [0, 0];
     let nextPosition;
-    // Here i<moveArr.length-1 is used because the last element in moveArr can only be '' or '{direaction}', both of them has no effect on the final calculation result, so there is no need to bring it into the loop
+    // Here i<moveArr.length-1 is used because the last element in moveArr can only be '' or '{direaction}', both of them has no effect on the final calculation result
     for (let i = 0; i < moveArr.length - 1; i++) {
         const nextMove = moveArr[i];
         // if start with 'x'.
         if (nextMove === '') {
-            box.push([...currentPosition]);
+            box.push(currentPosition);
         } else {
             nextPosition = handleMove(currentPosition, nextMove);
             //if start with direction and box is empty.
             if (box.length === 0) {
-                box.push([...nextPosition]);
+                box.push(nextPosition);
             } else {
                 //if box is not empty，check whether the box has the photo
                 const isPositionExist = arrayHasElement(box, nextPosition);
-                !isPositionExist && box.push([...nextPosition]);
+                !isPositionExist && box.push(nextPosition);
             }
             // Relocation
             currentPosition = nextPosition;
@@ -91,12 +97,13 @@ const instructionsSplit = (arr) => {
     }
 }
 
-const mergeTwoDArray = (arr1, arr2) => {
-    const array = [...arr1, ...arr2];
+const mergePhotosBox = (firstArr, secondArr) => {
+    const array = [...firstArr, ...secondArr];
     const result = unique(array);
     return result
 }
 
+// Remove the duplicates in 2D array
 const unique = (matrix) => {
     let res = [];
     matrix.map(item => {
@@ -105,11 +112,9 @@ const unique = (matrix) => {
     return Object.values(res);
 }
 
-
-
 module.exports = {
     removeDuplicateX,
-    countBillboards,
+    calculateUniqPhotos,
     instructionsSplit,
-    mergeTwoDArray
+    mergePhotosBox
 };

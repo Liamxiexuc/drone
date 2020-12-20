@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
-const { removeDuplicateX, countBillboards, instructionsSplit, mergeTwoDArray } = require('./utils/function');
+const { removeDuplicateX, calculateUniqPhotos, instructionsSplit, mergePhotosBox } = require('./controllers/drone');
 
 
 app.use(cors());
@@ -15,37 +15,49 @@ app.get('/', (req, res) => {
 app.post('/partOne', (req, res) => {
     const { instructions } = req.body;
 
-    //1. Remove consecutive duplicate "x" in instructions string
+    //TODO add filter
+
+    // 1. Remove consecutive duplicate "x"
     let string = removeDuplicateX(instructions);
 
-    //2. Count photos
-    const result = countBillboards(string).length;
+    // 2. Get billboard photos
+    const photosBox = calculateUniqPhotos(string);
 
-    res.json( result );
+    // 3. Count photos
+    const result = photosBox.length
+
+    res.json(result);
 });
 
 app.post('/partTwo', (req, res) => {
     const { instructions } = req.body;
+
+    //TODO add filter
+
     //let shortInstructions = removeDuplicateX(instructions);
+    // 1. Distribute instructions
     const instructionsArr = [...instructions];
     const instructionsObj = instructionsSplit(instructionsArr);
     const { first, second } = instructionsObj;
 
-    // for first drone
+    // 2. Get billboard photos of each drone
+    //  2.1 For first drone
     const firstString = first.join('');
-    //removeDuplicateX
     let shortFirstString = removeDuplicateX(firstString);
-    const firstBillboardsBox = countBillboards(shortFirstString);
+    const firstPhtosBox = calculateUniqPhotos(shortFirstString);
 
-    // for second drone
+    //  2.2 For second drone
     const secondString = second.join('');
-    //removeDuplicateX
     let shortSecondString = removeDuplicateX(secondString);
-    const secondBillboardsBox = countBillboards(shortSecondString);
-    const result = mergeTwoDArray(firstBillboardsBox, secondBillboardsBox)
-    const num = result.length;
+    const secondPhotosBox = calculateUniqPhotos(shortSecondString);
 
-    res.json( num );
+    // 3. Merge 2 billboard photos Box without duplicates
+    const mergedPhotosBox = mergePhotosBox(firstPhtosBox, secondPhotosBox)
+
+    // 4. Count photos
+    const result = mergedPhotosBox.length;
+
+    res.json(result);
 });
 
 app.listen(4001, () => console.log(`Api started at http://localhost:4001`));
