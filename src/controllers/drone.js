@@ -1,5 +1,7 @@
-const instructionsValidation = (instructions) => {
-    return /^[\^v<>x]*$/.test(instructions)
+const instructionsValidation = (string) => {
+    if (!string) return false;
+    const regex = /^[\^v<>x]*$/;
+    return regex.test(string)
 }
 
 const handleMove = (position, nextMove) => {

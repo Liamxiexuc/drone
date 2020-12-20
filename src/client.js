@@ -27,6 +27,7 @@ function App() {
     const handleSubmit = () => {
         setIsloading(true)
         setError(null);
+        setResult('');
         sendInstructions(droneNumber, instructions)
             .then(data => {
                 setResult(data);
