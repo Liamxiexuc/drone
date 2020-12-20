@@ -26,12 +26,16 @@ function App() {
 
     const handleSubmit = () => {
         setIsloading(true)
+        setError(null);
         sendInstructions(droneNumber, instructions)
             .then(data => {
                 setResult(data);
-                setIsloading(false)
+                setIsloading(false);
             })
-            .catch(err => setError(err));
+            .catch(err => {
+                setError(err);
+                setIsloading(false);
+            });
     }
 
     return (

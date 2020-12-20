@@ -16,7 +16,7 @@ const Main = ({ instructions, result, isLoading, error, handleInputChange, handl
             <button onClick={handleSubmit} className="btn" type="submit">Submit ></button>
             <div className="container">
                 <div className="output">
-                    {error && 'Error'}
+                    {error && JSON.stringify(error.response.data)}
                     {isLoading && 'Loading...'}
                     {result}
                 </div>

@@ -1,7 +1,5 @@
 const instructionsValidation = (instructions) => {
-    //remove space
-    instructions = instructions.replace(/\s*/g, "");
-
+    return /^[\^v<>x]*$/.test(instructions)
 }
 
 const handleMove = (position, nextMove) => {
@@ -113,6 +111,7 @@ const unique = (matrix) => {
 }
 
 module.exports = {
+    instructionsValidation,
     removeDuplicateX,
     calculateUniqPhotos,
     instructionsSplit,
