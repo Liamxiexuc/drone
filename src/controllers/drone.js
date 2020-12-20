@@ -42,7 +42,7 @@ const removeDuplicateX = (string) => {
     return result.join('');
 }
 
-const calculateUniqPhotos = instructions => {
+const getUniqPhotos = instructions => {
     const moveArr = instructions.split("x");
     const box = [];
     let currentPosition = [0, 0];
@@ -74,14 +74,12 @@ const calculateUniqPhotos = instructions => {
 // Check whether an array element exist in a 2D array
 const arrayHasElement = function (array, element) {
     for (let el of array) {
-        if (el.length === element.length) {
-            for (let index in el) {
-                if (el[index] !== element[index]) {
-                    break;
-                }
-                if (index == (el.length - 1)) {
-                    return true;
-                }
+        for (let index in el) {
+            if (el[index] !== element[index]) {
+                break;
+            }
+            if (index == (el.length - 1)) {
+                return true;
             }
         }
     }
@@ -115,7 +113,10 @@ const unique = (matrix) => {
 module.exports = {
     instructionsValidation,
     removeDuplicateX,
-    calculateUniqPhotos,
+    getUniqPhotos,
     instructionsSplit,
-    mergePhotosBox
+    mergePhotosBox,
+    handleMove,
+    arrayHasElement,
+    unique
 };

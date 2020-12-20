@@ -5,12 +5,14 @@
   "scripts": {
     "watch": "concurrently \"npm run watch-client\" \"nodemon src/api.js\"",
     "watch-api": "node src/api.js",
-    "watch-client": "poi src/client.js --serve"
+    "watch-client": "poi src/client.js --serve",
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs-extra": "^8.1.0",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.6",
     "poi": "^12.7.3",
     "react": "^16.10.2",

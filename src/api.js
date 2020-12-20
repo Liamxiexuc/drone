@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const path = require('path');
-const { instructionsValidation, removeDuplicateX, calculateUniqPhotos, instructionsSplit, mergePhotosBox } = require('./controllers/drone');
+const { instructionsValidation, removeDuplicateX, getUniqPhotos, instructionsSplit, mergePhotosBox } = require('./controllers/drone');
 
 app.use(cors());
 app.use(express.json());
@@ -21,7 +21,7 @@ app.post('/partOne', (req, res) => {
     let string = removeDuplicateX(instructions);
 
     // 3. Get billboard photos
-    const photosBox = calculateUniqPhotos(string);
+    const photosBox = getUniqPhotos(string);
 
     // 4. Count photos
     const result = photosBox.length
@@ -44,12 +44,12 @@ app.post('/partTwo', (req, res) => {
     //  3.1 For first drone
     const firstString = first.join('');
     let shortFirstString = removeDuplicateX(firstString);
-    const firstPhtosBox = calculateUniqPhotos(shortFirstString);
+    const firstPhtosBox = getUniqPhotos(shortFirstString);
 
     //  3.2 For second drone
     const secondString = second.join('');
     let shortSecondString = removeDuplicateX(secondString);
-    const secondPhotosBox = calculateUniqPhotos(shortSecondString);
+    const secondPhotosBox = getUniqPhotos(shortSecondString);
 
     // 4. Merge 2 billboard photos Box without duplicates
     const mergedPhotosBox = mergePhotosBox(firstPhtosBox, secondPhotosBox)
