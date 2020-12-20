@@ -40,7 +40,10 @@ The project consists of an express route in `api.js` and a react client in `clie
 npm install
 
 # Run the api and client
-npm watch
+npm run watch
+
+# Run the unit tests
+npm test
 
 # open the app
 open http://localhost:4000
