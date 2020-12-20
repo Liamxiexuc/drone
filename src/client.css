@@ -27,47 +27,12 @@ button {
     padding: 1.5rem;
 }
 
-.content {
+.main {
     flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
-@media only screen and (min-width: 480px) {
-	.drone__container {
-		max-width: 480px;
-		margin: 3rem auto 0 auto;
-		border: 1px solid #666;
-		border-radius: 10px;
-		height: auto;
-		box-shadow: 5px 5px 10px #999;
-    }
-}
-
-@media only screen and (min-width: 800px) {
-
-	.drone__container {
-		max-width: 800px;
-		margin: 3rem auto 0 auto;
-		border: 1px solid #666;
-		border-radius: 10px;
-		height: auto;
-        box-shadow: 5px 5px 10px #999;
-        height: auto;
-    }
-
-    .content {
-        flex-direction: row;
-    }
-
-    .container {
-        margin: 1.5rem;
-        padding: 0;
-        flex: 1;
-    }
-}
-
 
 .header__title {
     width: 100%;
@@ -81,11 +46,9 @@ button {
 	vertical-align: middle;
 }
 
-nav {
-    background: #323544;
+.header__nav {
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.24);
     padding: 0.8rem 0 0.8rem 1.5rem;
-    display: flex;
 }
 
 .nav__btn {
@@ -103,9 +66,7 @@ nav {
     background-color: #009ad8;
 }
 
-
-
-.content .container--lg {
+.main .container--lg {
     flex: 2
 }
 
@@ -136,7 +97,31 @@ nav {
     border-radius: 7px;
     color: #fff;
     padding: 0.5rem 1rem;
-    border: none;
-    outline: none;
 }
 
+@media only screen and (min-width: 480px) {
+	.drone__container {
+		max-width: 480px;
+		margin: 3rem auto 0 auto;
+		border: 1px solid #666;
+		border-radius: 10px;
+		height: auto;
+		box-shadow: 5px 5px 10px #999;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+	.drone__container {
+		max-width: 800px;
+    }
+
+    .main {
+        flex-direction: row;
+    }
+
+    .container {
+        margin: 1.5rem;
+        padding: 0;
+        flex: 1;
+    }
+}

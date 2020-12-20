@@ -1,6 +1,6 @@
 import { post } from './axios';
 
-export const addInstructions = (droneNumber, instructions) => {
+export const sendInstructions = (droneNumber, instructions) => {
     const url = droneNumber === 1 ? '/partOne' : '/partTwo';
     const data = {
         instructions
