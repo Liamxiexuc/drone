@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Main from './components/Main';
+import Footer from './components/Footer';
 import { sendInstructions } from './utils/api';
 import './client.css'
 
@@ -53,6 +54,7 @@ function App() {
                 handleInputChange={handleInputChange}
                 handleSubmit={handleSubmit}
             />
+            <Footer />
         </div>
     );
 }
