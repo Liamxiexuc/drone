@@ -80,16 +80,16 @@ describe('getUniqSnapshots function', () => {
 });
 
 describe('instructionsSplit function', () => {
-	it('should properly split the Arrays with even number of elements and store as a object', () => {
-		const array = ['x', 'v', 'x', '^'];
+	it('should properly split the instruction strings of even characters and store as a object', () => {
+		const string = 'xvx^';
 
-		expect(instructionsSplit(array)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v^' });
+		expect(instructionsSplit(string)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v^' });
 	});
 
-	it('should properly split the Arrays with odd number of elements', () => {
-		const array = ['x', 'v', 'x'];
+	it('should properly split the instruction string of odd characters and store as a object', () => {
+		const string = 'xvx';
 
-		expect(instructionsSplit(array)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v' });
+		expect(instructionsSplit(string)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v' });
 	});
 });
 
