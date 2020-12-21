@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 
-
 const Header = ({ droneNumber, handleDroneNumberChange }) => {
 
     return (
