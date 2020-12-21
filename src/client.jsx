@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import { sendInstructions } from './utils/api';
+import { sendInstructions } from './services/api';
 import './client.css';
 
 function App() {

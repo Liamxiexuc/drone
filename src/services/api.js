@@ -1,6 +1,6 @@
-import { post } from './axios';
+import { post } from '../utils/axios';
 
-export const sendInstructions = (droneNumber, instructions) => {
+export const sendSingleInstructions = (droneNumber, instructions) => {
 	const url = droneNumber === 1 ? '/partOne' : '/partTwo';
 	const data = {
 		instructions,
