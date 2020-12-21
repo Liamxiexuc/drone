@@ -47,15 +47,15 @@ const getUniqPhotos = instructions => {
     const box = [];
     let currentPosition = [0, 0];
     let nextPosition;
-    // Here i<moveArr.length-1 is used because the last element in moveArr can only be '' or '{direaction}', both of them has no effect on the final calculation result
-    for (let i = 0; i < moveArr.length - 1; i++) {
-        const nextMove = moveArr[i];
+    // the last element in moveArr can only be '' or '{direaction}', both of them has no effect on the final calculation result
+    const effectMoveArr = moveArr.slice(0, moveArr.length - 1)
+    effectMoveArr.map(move => {
         // if start with 'x'.
-        if (nextMove === '') {
+        if (move === '') {
             box.push(currentPosition);
         } else {
-            nextPosition = handleMove(currentPosition, nextMove);
-            //if start with direction and box is empty.
+            nextPosition = handleMove(currentPosition, move);
+            // if start with direction and box is empty.
             if (box.length === 0) {
                 box.push(nextPosition);
             } else {
@@ -66,10 +66,9 @@ const getUniqPhotos = instructions => {
             // Relocation
             currentPosition = nextPosition;
         }
-    }
-
+    })
     return box;
-};
+}; 
 
 // Check whether an array element exist in a 2D array
 const arrayHasElement = function (array, element) {
