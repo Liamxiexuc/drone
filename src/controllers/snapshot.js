@@ -1,3 +1,4 @@
+const responseFormatter = require('../utils/responseFormatter');
 
 const createSnapshots = (req, res) => {
 	const { instructions } = req.body;
@@ -9,7 +10,7 @@ const createSnapshots = (req, res) => {
 		snapshotsBox = getTwoDroneSnapshots(instructions);
 	}
 	const result = snapshotsBox.length;
-	return res.json(result);
+	return responseFormatter(res, 200, 'ok', result);
 }
 
 const handleMove = (position, nextMove) => {

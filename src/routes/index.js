@@ -1,7 +1,7 @@
 const express = require('express');
 const responseFormatter = require('../utils/responseFormatter');
 const instructionsValidator = require('../middlewares/instructionsValidator');
-const { createSnapshots } = require('../controllers/drone');
+const { createSnapshots } = require('../controllers/snapshot');
 
 const router = express.Router();
 

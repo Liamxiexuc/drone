@@ -30,7 +30,7 @@ function App() {
         setResult('');
         sendInstructions(droneNumber, instructions)
             .then(data => {
-                setResult(data);
+                setResult(data.data);
                 setIsloading(false);
             })
             .catch(err => {
