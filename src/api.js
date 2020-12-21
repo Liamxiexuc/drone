@@ -1,10 +1,34 @@
+require('dotenv').config();
 const express = require('express');
-const app = express();
+const helmet = require('helmet');
+const morgan = require('morgan');
 const cors = require('cors');
 const {
-    instructionsValidation, removeDuplicateX, getUniqPhotos, instructionsSplit, mergePhotosBox,
+    instructionsValidation, getSingleDroneSnapshots, getTwoDroneSnapshots
 } = require('./controllers/drone');
+const logger = require('./utils/logger');
+const errorHandler = require('./middlewares/errorHandler');
+const notFoundHandler = require('./middlewares/notFound');
 
+const PORT = process.env.PORT || 4001;
+
+process.on('uncaughtException', (e) => {
+    logger.error(e.message);
+    process.exit(1);
+});
+
+process.on('unhandledRejection', (e) => {
+    logger.error(e.message);
+    process.exit(1);
+});
+
+const app = express();
+
+const morganLog =
+    process.env.NODE_ENV === 'production' ? morgan('common') : morgan('dev');
+
+app.use(helmet());
+app.use(morganLog);
 app.use(cors());
 app.use(express.json());
 
@@ -15,17 +39,11 @@ app.get('/', (req, res) => {
 app.post('/partOne', (req, res) => {
     const { instructions } = req.body;
 
-    // 1. Check instructions format (only allow <>^vx )
     if (!instructionsValidation(instructions)) return res.status(400).json('Invalid Instructions');
 
-    // 2. Remove consecutive duplicate "x"
-    const string = removeDuplicateX(instructions);
+    const snapshotsBox = getSingleDroneSnapshots(instructions);
 
-    // 3. Get billboard photos
-    const photosBox = getUniqPhotos(string);
-
-    // 4. Count photos
-    const result = photosBox.length;
+    const result = snapshotsBox.length;
 
     return res.json(result);
 });
@@ -33,32 +51,15 @@ app.post('/partOne', (req, res) => {
 app.post('/partTwo', (req, res) => {
     const { instructions } = req.body;
 
-    // 1. Check instructions format (only allow <>^vx )
     if (!instructionsValidation(instructions)) return res.status(400).json('Invalid Instructions');
 
-    // 2. Distribute instructions
-    const instructionsArr = [...instructions];
-    const instructionsObj = instructionsSplit(instructionsArr);
-    const { first, second } = instructionsObj;
+    const mergedSnapshotsBox = getTwoDroneSnapshots(instructions);
 
-    // 3. Get billboard photos of each drone
-    //  3.1 For first drone
-    const firstString = first.join('');
-    const validFirstString = removeDuplicateX(firstString);
-    const firstPhtosBox = getUniqPhotos(validFirstString);
-
-    //  3.2 For second drone
-    const secondString = second.join('');
-    const validSecondString = removeDuplicateX(secondString);
-    const secondPhotosBox = getUniqPhotos(validSecondString);
-
-    // 4. Merge 2 billboard photos Box without duplicates
-    const mergedPhotosBox = mergePhotosBox(firstPhtosBox, secondPhotosBox);
-
-    // 5. Count photos
-    const result = mergedPhotosBox.length;
+    const result = mergedSnapshotsBox.length;
 
     return res.json(result);
 });
+app.use(errorHandler);
+app.use(notFoundHandler);
 
-app.listen(4001, () => console.log('Api started at http://localhost:4001'));
+app.listen(PORT, () => logger.info(`Api started at http://localhost:${PORT}`));

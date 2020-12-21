@@ -1,7 +1,7 @@
-const instructionsValidation = (string) => {
-	if (!string) return false;
+const instructionsValidation = (validInstructions) => {
+	if (!validInstructions) return false;
 	const regex = /^[\^v<>x]*$/;
-	return regex.test(string);
+	return regex.test(validInstructions);
 };
 
 const handleMove = (position, nextMove) => {
@@ -26,10 +26,10 @@ const handleMove = (position, nextMove) => {
 	return currentPosition;
 };
 
-const removeDuplicateX = (string) => {
-	const stringArr = [...string];
+const removeDuplicateX = (validInstructions) => {
+	const validInstructionsArr = [...validInstructions];
 	const result = [];
-	stringArr.forEach((i) => {
+	validInstructionsArr.forEach((i) => {
 		if (result.length === 0) {
 			result.push(i);
 		} else {
@@ -92,12 +92,12 @@ const instructionsSplit = (arr) => {
 	const even = arr.filter((_item, index) => index % 2 === 0);
 	const odd = arr.filter((_item, index) => index % 2 !== 0);
 	return {
-		first: even,
-		second: odd,
+		firstInstructions: even.join(''),
+		secondInstructions: odd.join(''),
 	};
 };
 
-const mergePhotosBox = (firstArr, secondArr) => {
+const mergeSnapshotsBox = (firstArr, secondArr) => {
 	const array = [...firstArr, ...secondArr];
 	const result = unique(array);
 	return result;
@@ -111,14 +111,37 @@ const unique = (matrix) => {
 	});
 	return Object.values(res);
 };
+//TODO testing
+const getSingleDroneSnapshots = (instructions) => {
+	// 1. Remove consecutive duplicate "x"
+	const validInstructions = removeDuplicateX(instructions);
+	// 2. Get billboard photos
+	const photosBox = getUniqPhotos(validInstructions);
+	return photosBox;
+}
+
+const getTwoDroneSnapshots = (instructions) => {
+	// 1. Distribute instructions
+	const instructionsArr = [...instructions];
+	const instructionsObj = instructionsSplit(instructionsArr);
+	const { firstInstructions, secondInstructions } = instructionsObj;
+	// 2. Get billboard photos of each drone
+	const firstSnapshotsBox = getSingleDroneSnapshots(firstInstructions);
+	const secondSnapshotsBox = getSingleDroneSnapshots(secondInstructions);
+	// 4. Merge 2 billboard photos Box without duplicates
+	const mergedSnapshotsBox = mergeSnapshotsBox(firstSnapshotsBox, secondSnapshotsBox);
+	return mergedSnapshotsBox;
+}
 
 module.exports = {
     instructionsValidation,
     removeDuplicateX,
     getUniqPhotos,
     instructionsSplit,
-    mergePhotosBox,
+	mergeSnapshotsBox,
     handleMove,
     arrayHasElement,
-    unique,
+	unique,
+	getSingleDroneSnapshots,
+	getTwoDroneSnapshots,
 };
