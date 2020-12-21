@@ -18,7 +18,7 @@ module.exports = (req, res, next) => {
 		return responseFormatter(
 			res,
 			400,
-			'Drone Number parameter is missing',
+			'Drone Number parameter is invalid',
 			null,
 		);
 	}
