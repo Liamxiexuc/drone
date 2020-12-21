@@ -1,4 +1,4 @@
-const { instructionsValidation } = require('../utils/utils')
+const { instructionsValidation } = require('../utils/utils');
 const responseFormatter = require('../utils/responseFormatter');
 
 module.exports = (req, res, next) => {

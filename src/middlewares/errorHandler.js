@@ -1,25 +1,26 @@
 const responseFormatter = require('../utils/responseFormatter');
 const logger = require('../utils/logger');
 
+/* eslint-disable no-unused-vars */
 module.exports = (error, req, res, next) => {
 	if (error.response) {
 		// The request was made and the server responded with a status code
 		// that falls out of the range of 2xx
-		const data = error.response.data;
+		const { data } = error.response;
 		if (data.cod === '429') {
 			logger.warn(data.message);
 			return responseFormatter(
 				res,
 				503,
 				'The server is busy at the moment, please try again later',
-				null
+				null,
 			);
 		}
 		return responseFormatter(
 			res,
 			Number.parseInt(data.cod),
 			data.message,
-			null
+			null,
 		);
 	} else if (error.request) {
 		// The request was made but no response was received
@@ -35,6 +36,6 @@ module.exports = (error, req, res, next) => {
 		res,
 		500,
 		'Something failed, we are investigating!',
-		null
+		null,
 	);
 };

@@ -2,7 +2,7 @@
     "env": {
         "browser": true,
         "es2021": true,
-		"node": true,
+        "node": true,
 		"jest": true
     },
     "extends": [
@@ -19,20 +19,20 @@
     "plugins": [
         "react"
     ],
-    "rules": {
-        "linebreak-style": 0,
-        "global-require": 0,
-        "eslint linebreak-style": [
-            0,
-            "error",
-            "windows"
-        ],
+	"rules": {
+		"linebreak-style": 0,
+		"global-require": 0,
+		"eslint linebreak-style": [
+			0,
+			"error",
+			"windows"
+		],
 		"indent": "off",
 		"eqeqeq": "off",
 		"no-tabs": 0,
 		"no-unused-expressions": [
 			2,
-			{ 
+			{
 				"allowShortCircuit": true
 			}
 		],
@@ -40,6 +40,10 @@
 		"no-prototype-builtins": "off",
 		"import/prefer-default-export": "off",
 		"import/newline-after-import": "off",
-		"import/named": "off"
-    }
+		"import/named": "off",
+		"radix": "off",
+		"implicit-arrow-linebreak": "off",
+		"operator-linebreak": "off",
+		"no-else-return": "off"
+	}
 }

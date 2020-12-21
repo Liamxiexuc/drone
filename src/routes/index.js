@@ -10,10 +10,8 @@ router.get('/', (req, res) =>
 		res,
 		200,
 		'Welcome to the Drone Challenge api!',
-		null
-	)
-);
-
+		null,
+	));
 router.post('/snapshots', instructionsValidator, createSnapshots);
 
 module.exports = router;

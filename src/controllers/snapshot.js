@@ -11,7 +11,7 @@ const createSnapshots = (req, res) => {
 	}
 	const result = snapshotsBox.length;
 	return responseFormatter(res, 200, 'ok', result);
-}
+};
 
 const handleMove = (position, nextMove) => {
 	const currentPosition = [...position];
@@ -120,14 +120,14 @@ const unique = (matrix) => {
 	});
 	return Object.values(res);
 };
-//TODO testing
+// TODO testing
 const getSingleDroneSnapshots = (instructions) => {
 	// 1. Remove consecutive duplicate "x"
 	const validInstructions = removeDuplicateX(instructions);
 	// 2. Get billboard photos
 	const photosBox = getUniqPhotos(validInstructions);
 	return photosBox;
-}
+};
 
 const getTwoDroneSnapshots = (instructions) => {
 	// 1. Distribute instructions
@@ -140,7 +140,7 @@ const getTwoDroneSnapshots = (instructions) => {
 	// 4. Merge 2 billboard photos Box without duplicates
 	const mergedSnapshotsBox = mergeSnapshotsBox(firstSnapshotsBox, secondSnapshotsBox);
 	return mergedSnapshotsBox;
-}
+};
 
 module.exports = {
     removeDuplicateX,

@@ -9,10 +9,10 @@ const logger = createLogger({
 		format.label({ label: path.basename(module.parent.filename) }),
 		format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
 		format.printf(
-			info => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`
-		)
+			(info) => `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`,
+		),
 	),
-	transports: [new transports.Console()]
+	transports: [new transports.Console()],
 });
 
 module.exports = logger;
