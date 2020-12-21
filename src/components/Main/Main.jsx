@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 const Main = ({ instructions, result, isLoading, error, handleInputChange, handleSubmit }) => {
     return (
         <section className="main">

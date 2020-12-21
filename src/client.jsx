@@ -4,8 +4,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import { sendInstructions } from './utils/api';
-import './client.css'
-
+import './client.css';
 
 function App() {
     const [droneNumber, setDroneNumber] = useState(1);
@@ -19,11 +18,11 @@ function App() {
         setInstructions('');
         setResult('');
         setError(null);
-    }
+    };
 
     const handleInputChange = (event) => {
         setInstructions(event.target.value);
-    }
+    };
 
     const handleSubmit = () => {
         setIsloading(true)
@@ -37,8 +36,8 @@ function App() {
             .catch(err => {
                 setError(err);
                 setIsloading(false);
-            });
-    }
+            })
+    };
 
     return (
         <div className="drone__container">
@@ -57,7 +56,7 @@ function App() {
             <Footer />
         </div>
     );
-}
+};
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
