@@ -1,33 +1,12 @@
 const {
-    instructionsValidation,
     handleMove,
     removeDuplicateX,
     getUniqPhotos,
-    arrayHasElement,
     instructionsSplit,
-    unique,
-    mergePhotosBox,
-} = require('../src/controllers/drone');
-
-describe('instructions validate function', () => {
-    it('should return false when instruction is a empty string', () => {
-		const instruction = '';
-
-		expect(instructionsValidation(instruction)).toBe(false);
-    });
-
-    it('should return false when instruction incorrect', () => {
-		const instruction = 'abc';
-
-		expect(instructionsValidation(instruction)).toBe(false);
-    });
-
-    it('should return true when instruction correct', () => {
-		const instruction = 'x^xv<>';
-
-		expect(instructionsValidation(instruction)).toBe(true);
-    });
-});
+	mergeSnapshotsBox,
+	getSingleDroneSnapshots,
+	getTwoDroneSnapshots,
+} = require('../src/controllers/snapshot');
 
 describe('handleMove function', () => {
     it('should clones position array when the drone back to same position', () => {
@@ -80,28 +59,6 @@ describe('removeDuplicateX function', () => {
 	});
 });
 
-describe('arrayHasElement function', () => {
-    it('should return false when the array element does not exist in the 2D array', () => {
-		const array = [
-			[0, 0],
-			[1, 1],
-		];
-		const element = [2, 2];
-
-        expect(arrayHasElement(array, element)).toBe(false);
-    });
-
-    it('should return true when the array element exist in the 2D array', () => {
-		const array = [
-			[0, 0],
-			[1, 1],
-		];
-		const element = [1, 1];
-
-        expect(arrayHasElement(array, element)).toBe(true);
-    });
-});
-
 describe('getUniqPhotos function', () => {
 	it('should get empty array when there is no x in instruction', () => {
 		const instruction = 'v<>';
@@ -123,42 +80,20 @@ describe('getUniqPhotos function', () => {
 });
 
 describe('instructionsSplit function', () => {
-	it('should properly split the Arrays with even number of elements', () => {
+	it('should properly split the Arrays with even number of elements and store as a object', () => {
 		const array = ['x', 'v', 'x', '^'];
 
-		expect(instructionsSplit(array)).toEqual({ first: ['x', 'x'], second: ['v', '^'] });
+		expect(instructionsSplit(array)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v^' });
 	});
 
 	it('should properly split the Arrays with odd number of elements', () => {
 		const array = ['x', 'v', 'x'];
 
-		expect(instructionsSplit(array)).toEqual({ first: ['x', 'x'], second: ['v'] });
+		expect(instructionsSplit(array)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v' });
 	});
 });
 
-describe('unique function', () => {
-	it('should clones the matrix when there are no same elements in the matrix', () => {
-		const matrix = [
-			[0, 0],
-			[1, 1],
-		];
-
-		expect(unique(matrix)).toEqual(matrix);
-		expect(unique(matrix)).not.toBe(matrix);
-	});
-
-	it('should remove duplicate elements when there are same elements in the matrix', () => {
-		const matrix = [
-			[0, 0],
-			[1, 1],
-			[0, 0],
-		];
-
-		expect(unique(matrix)).toEqual([[0, 0], [1, 1]]);
-	});
-});
-
-describe('mergePhotosBox function', () => {
+describe('mergeSnapshotsBox function', () => {
 	it('should merge two matrix', () => {
 		const firstArr = [
 			[0, 0],
@@ -167,6 +102,22 @@ describe('mergePhotosBox function', () => {
 			[1, 1],
 		];
 
-		expect(mergePhotosBox(firstArr, secondArr)).toEqual([[0, 0], [1, 1]]);
+		expect(mergeSnapshotsBox(firstArr, secondArr)).toEqual([[0, 0], [1, 1]]);
+	});
+});
+
+describe('getSingleDroneSnapshots function', () => {
+	it('should properly get Single Drone Snapshots', () => {
+		const instructions = 'xvxv';
+
+		expect(getSingleDroneSnapshots(instructions)).toEqual([[0, 0], [0, -1]]);
+	});
+});
+
+describe('getTwoDroneSnapshots function', () => {
+	it('should properly get Two Drone Snapshots', () => {
+		const instructions = 'xvxv';
+
+		expect(getTwoDroneSnapshots(instructions)).toEqual([[0, 0]]);
 	});
 });
