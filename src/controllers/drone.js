@@ -1,8 +1,16 @@
-const instructionsValidation = (validInstructions) => {
-	if (!validInstructions) return false;
-	const regex = /^[\^v<>x]*$/;
-	return regex.test(validInstructions);
-};
+
+const createSnapshots = (req, res) => {
+	const { instructions } = req.body;
+	const { droneNumber } = req.query;
+	let snapshotsBox = [];
+	if (droneNumber === '1') {
+		snapshotsBox = getSingleDroneSnapshots(instructions);
+	} else {
+		snapshotsBox = getTwoDroneSnapshots(instructions);
+	}
+	const result = snapshotsBox.length;
+	return res.json(result);
+}
 
 const handleMove = (position, nextMove) => {
 	const currentPosition = [...position];
@@ -134,7 +142,6 @@ const getTwoDroneSnapshots = (instructions) => {
 }
 
 module.exports = {
-    instructionsValidation,
     removeDuplicateX,
     getUniqPhotos,
     instructionsSplit,
@@ -144,4 +151,5 @@ module.exports = {
 	unique,
 	getSingleDroneSnapshots,
 	getTwoDroneSnapshots,
+	createSnapshots,
 };

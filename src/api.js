@@ -3,9 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
-const {
-    instructionsValidation, getSingleDroneSnapshots, getTwoDroneSnapshots
-} = require('./controllers/drone');
+const routes = require('./routes');
 const logger = require('./utils/logger');
 const errorHandler = require('./middlewares/errorHandler');
 const notFoundHandler = require('./middlewares/notFound');
@@ -32,33 +30,7 @@ app.use(morganLog);
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.json('API ready');
-});
-
-app.post('/partOne', (req, res) => {
-    const { instructions } = req.body;
-
-    if (!instructionsValidation(instructions)) return res.status(400).json('Invalid Instructions');
-
-    const snapshotsBox = getSingleDroneSnapshots(instructions);
-
-    const result = snapshotsBox.length;
-
-    return res.json(result);
-});
-
-app.post('/partTwo', (req, res) => {
-    const { instructions } = req.body;
-
-    if (!instructionsValidation(instructions)) return res.status(400).json('Invalid Instructions');
-
-    const mergedSnapshotsBox = getTwoDroneSnapshots(instructions);
-
-    const result = mergedSnapshotsBox.length;
-
-    return res.json(result);
-});
+app.use('/api/v1', routes);
 app.use(errorHandler);
 app.use(notFoundHandler);
 
