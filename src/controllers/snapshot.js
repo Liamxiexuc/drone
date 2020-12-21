@@ -18,7 +18,7 @@ const getSingleDroneSnapshots = (instructions) => {
 	// 1. Remove consecutive duplicate "x"
 	const validInstructions = removeDuplicateX(instructions);
 	// 2. Get billboard photos
-	const photosBox = getUniqPhotos(validInstructions);
+	const photosBox = getUniqSnapshots(validInstructions);
 	return photosBox;
 };
 
@@ -30,7 +30,7 @@ const getTwoDroneSnapshots = (instructions) => {
 	// 2. Get billboard photos of each drone
 	const firstSnapshotsBox = getSingleDroneSnapshots(firstInstructions);
 	const secondSnapshotsBox = getSingleDroneSnapshots(secondInstructions);
-	// 4. Merge 2 billboard photos Box without duplicates
+	// 4. Merge 2 billboard photos Box without duplicates elements
 	const mergedSnapshotsBox = mergeSnapshotsBox(firstSnapshotsBox, secondSnapshotsBox);
 	return mergedSnapshotsBox;
 };
@@ -57,23 +57,23 @@ const handleMove = (position, nextMove) => {
 	return currentPosition;
 };
 
-const removeDuplicateX = (validInstructions) => {
-	const validInstructionsArr = [...validInstructions];
-	const result = [];
+const removeDuplicateX = (instructions) => {
+	const validInstructionsArr = [...instructions];
+	const validInstructions = [];
 	validInstructionsArr.forEach((i) => {
-		if (result.length === 0) {
-			result.push(i);
+		if (validInstructions.length === 0) {
+			validInstructions.push(i);
 		} else {
-			const lastChar = result[result.length - 1];
+			const lastChar = validInstructions[validInstructions.length - 1];
 			if (i !== 'x' || lastChar !== 'x') {
-				result.push(i);
+				validInstructions.push(i);
 			}
 		}
 	});
-	return result.join('');
+	return validInstructions.join('');
 };
 
-const getUniqPhotos = (instructions) => {
+const getUniqSnapshots = (instructions) => {
     const moveArr = instructions.split('x');
     const box = [];
     let currentPosition = [0, 0];
@@ -119,7 +119,7 @@ const mergeSnapshotsBox = (firstArr, secondArr) => {
 
 module.exports = {
     removeDuplicateX,
-    getUniqPhotos,
+    getUniqSnapshots,
     instructionsSplit,
 	mergeSnapshotsBox,
     handleMove,

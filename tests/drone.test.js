@@ -1,7 +1,7 @@
 const {
     handleMove,
     removeDuplicateX,
-    getUniqPhotos,
+	getUniqSnapshots,
     instructionsSplit,
 	mergeSnapshotsBox,
 	getSingleDroneSnapshots,
@@ -59,23 +59,23 @@ describe('removeDuplicateX function', () => {
 	});
 });
 
-describe('getUniqPhotos function', () => {
+describe('getUniqSnapshots function', () => {
 	it('should get empty array when there is no x in instruction', () => {
 		const instruction = 'v<>';
 
-		expect(getUniqPhotos(instruction)).toEqual([]);
+		expect(getUniqSnapshots(instruction)).toEqual([]);
 	});
 
 	it('should get correct photos position array when there is a x in instruction', () => {
 		const instruction = 'vx<>';
 
-		expect(getUniqPhotos(instruction)).toEqual([[0, -1]]);
+		expect(getUniqSnapshots(instruction)).toEqual([[0, -1]]);
 	});
 
 	it('should get correct photos position array when there is a x in instruction', () => {
 		const instruction = 'xvx<>';
 
-		expect(getUniqPhotos(instruction)).toEqual([[0, 0], [0, -1]]);
+		expect(getUniqSnapshots(instruction)).toEqual([[0, 0], [0, -1]]);
 	});
 });
 
