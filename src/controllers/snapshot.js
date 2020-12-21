@@ -1,3 +1,4 @@
+const { arrayHasElement, unique } = require('../utils/utils');
 const responseFormatter = require('../utils/responseFormatter');
 
 const createSnapshots = (req, res) => {
@@ -11,6 +12,27 @@ const createSnapshots = (req, res) => {
 	}
 	const result = snapshotsBox.length;
 	return responseFormatter(res, 200, 'ok', result);
+};
+
+const getSingleDroneSnapshots = (instructions) => {
+	// 1. Remove consecutive duplicate "x"
+	const validInstructions = removeDuplicateX(instructions);
+	// 2. Get billboard photos
+	const photosBox = getUniqPhotos(validInstructions);
+	return photosBox;
+};
+
+const getTwoDroneSnapshots = (instructions) => {
+	// 1. Distribute instructions
+	const instructionsArr = [...instructions];
+	const instructionsObj = instructionsSplit(instructionsArr);
+	const { firstInstructions, secondInstructions } = instructionsObj;
+	// 2. Get billboard photos of each drone
+	const firstSnapshotsBox = getSingleDroneSnapshots(firstInstructions);
+	const secondSnapshotsBox = getSingleDroneSnapshots(secondInstructions);
+	// 4. Merge 2 billboard photos Box without duplicates
+	const mergedSnapshotsBox = mergeSnapshotsBox(firstSnapshotsBox, secondSnapshotsBox);
+	return mergedSnapshotsBox;
 };
 
 const handleMove = (position, nextMove) => {
@@ -80,23 +102,6 @@ const getUniqPhotos = (instructions) => {
     return box;
 };
 
-// Check whether an array element exist in a 2D array
-const arrayHasElement = function (array, element) {
-	for (const el of array) {
-		for (const index in el) {
-			if (el.hasOwnProperty(index)) {
-				if (el[index] !== element[index]) {
-					break;
-				}
-				if (index == (el.length - 1)) {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-};
-
 const instructionsSplit = (arr) => {
 	const even = arr.filter((_item, index) => index % 2 === 0);
 	const odd = arr.filter((_item, index) => index % 2 !== 0);
@@ -110,36 +115,6 @@ const mergeSnapshotsBox = (firstArr, secondArr) => {
 	const array = [...firstArr, ...secondArr];
 	const result = unique(array);
 	return result;
-};
-
-// Remove the duplicates in 2D array
-const unique = (matrix) => {
-	const res = [];
-	matrix.forEach((item) => {
-		res[item] = item;
-	});
-	return Object.values(res);
-};
-// TODO testing
-const getSingleDroneSnapshots = (instructions) => {
-	// 1. Remove consecutive duplicate "x"
-	const validInstructions = removeDuplicateX(instructions);
-	// 2. Get billboard photos
-	const photosBox = getUniqPhotos(validInstructions);
-	return photosBox;
-};
-
-const getTwoDroneSnapshots = (instructions) => {
-	// 1. Distribute instructions
-	const instructionsArr = [...instructions];
-	const instructionsObj = instructionsSplit(instructionsArr);
-	const { firstInstructions, secondInstructions } = instructionsObj;
-	// 2. Get billboard photos of each drone
-	const firstSnapshotsBox = getSingleDroneSnapshots(firstInstructions);
-	const secondSnapshotsBox = getSingleDroneSnapshots(secondInstructions);
-	// 4. Merge 2 billboard photos Box without duplicates
-	const mergedSnapshotsBox = mergeSnapshotsBox(firstSnapshotsBox, secondSnapshotsBox);
-	return mergedSnapshotsBox;
 };
 
 module.exports = {
