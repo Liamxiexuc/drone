@@ -1,138 +1,39 @@
 * {
-	box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-	color: #bfc1c8;
-	font-size: 16px;
-	font-family: "Roboto", sans-serif;
-	line-height: 1.5;
+    color: #bfc1c8;
+    font-size: 16px;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.5;
 }
 
 body input,
 button {
-	border: none;
-	font-size: 100%;
-	outline: none;
-}
-
-.drone__container {
-	background: #323544;
-	position: relative;
-}
-
-.container {
-    width: 100%;
-    margin: 0;
-    padding: 1.5rem;
-}
-
-.main {
-    flex-direction: column;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.header__title {
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 0.5rem 0 0.5rem 1.5rem;
-	color: #fff;
-	display: inline-block;
-	font-size: 1.2rem;
-	font-weight: 700;
-	margin: 0;
-	vertical-align: middle;
-}
-
-.header__nav {
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.24);
-    padding: 0.8rem 0 0.8rem 1.5rem;
-}
-
-.nav__btn {
-    cursor: pointer;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    margin-right: 28px;
-    padding: 5px 28px 5px 28px;
-    background-color: #eee;
-    color: #999;
-}
-
-.nav__btn--active {
-    color: #fff;
-    background-color: #009ad8;
-}
-
-.main .container--lg {
-    flex: 2
-}
-
-.input {
-    width: 100%;
-    height: 250px;
-    background: #1e202b;
-    border-radius: 7px;
-    color: #fff;
-    padding: 0.5rem 1rem;
     border: none;
+    font-size: 100%;
     outline: none;
 }
 
-.btn {
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: #009ad8;
-    color: #fff;
-    border-radius: 5px;
-}
-
-.output {
-    height: 250px;
-    background: #1e202b;
-    border-radius: 7px;
-    color: #fff;
-    padding: 0.5rem 1rem;
-}
-
-.drone__footer {
-    background-color: rgba(0, 0, 0, 0.1);
-    clear: both;
-	padding: 8px 30px;
-}
-
-.drone__footer p {
-    margin: 3px auto;
-	text-align: center;
+.drone__container {
+    background: #323544;
+    position: relative;
 }
 
 @media only screen and (min-width: 480px) {
-	.drone__container {
-		max-width: 480px;
-		margin: 3rem auto 0 auto;
-		border: 1px solid #666;
-		border-radius: 10px;
-		height: auto;
-		box-shadow: 5px 5px 10px #999;
+    .drone__container {
+        max-width: 480px;
+        margin: 3rem auto 0 auto;
+        border: 1px solid #666;
+        border-radius: 10px;
+        height: auto;
+        box-shadow: 5px 5px 10px #999;
     }
 }
 
 @media only screen and (min-width: 800px) {
-	.drone__container {
-		max-width: 800px;
-    }
-
-    .main {
-        flex-direction: row;
-    }
-
-    .container {
-        margin: 1.5rem;
-        padding: 0;
-        flex: 1;
+    .drone__container {
+        max-width: 800px;
     }
 }

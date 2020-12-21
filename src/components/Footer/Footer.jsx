@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from './Footer.module.css';
 
 const Footer = () => {
-	return (
-		<footer className="drone__footer">
-			<p>Powered by Xiexuc</p>
-		</footer>
-	);
+    return (
+        <footer className={styles.footer}>
+            <p className={styles.text}>Powered by Xiexuc</p>
+        </footer>
+    );
 };
 
 export default Footer;

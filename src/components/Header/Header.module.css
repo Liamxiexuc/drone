@@ -1,0 +1,31 @@
+.title {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    color: #fff;
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.nav {
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 3px rgba(0, 0, 0, 0.24);
+    padding: 0.8rem 0 0.8rem 1.5rem;
+}
+
+.btn {
+    cursor: pointer;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    margin-right: 28px;
+    padding: 5px 28px 5px 28px;
+    background-color: #eee;
+    color: #999;
+}
+
+.active {
+    color: #fff;
+    background-color: #009ad8;
+}
