@@ -44,6 +44,8 @@
 		"radix": "off",
 		"implicit-arrow-linebreak": "off",
 		"operator-linebreak": "off",
-		"no-else-return": "off"
+		"no-else-return": "off",
+		"no-use-before-define": "off",
+		"guard-for-in": "off"
 	}
 }
