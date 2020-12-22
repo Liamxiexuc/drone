@@ -66,16 +66,22 @@ describe('getUniqSnapshots function', () => {
         expect(getUniqSnapshots(instruction)).toEqual([]);
     });
 
-    it('should get correct photos position array when there is a x in instruction', () => {
+    it('should get correct snapshots when there is a x in instruction', () => {
         const instruction = 'vx<>';
 
         expect(getUniqSnapshots(instruction)).toEqual([[0, -1]]);
     });
 
-    it('should get correct photos position array when there is a x in instruction', () => {
+    it('should get correct snapshots when there is multiple x in instruction', () => {
         const instruction = 'xvx<>';
 
         expect(getUniqSnapshots(instruction)).toEqual([[0, 0], [0, -1]]);
+    });
+
+    it('should get correct snapshots when position moved and Start && finish at the same location and both photographed', () => {
+        const instruction = 'x>^x<vx';
+
+        expect(getUniqSnapshots(instruction)).toEqual([[0, 0], [1, 1]]);
     });
 });
 
