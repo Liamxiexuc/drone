@@ -87,7 +87,7 @@ const removeDuplicateX = (instructions) => {
 const getUniqSnapshots = (instructions) => {
     const moveArr = instructions.split('x');
     const box = [];
-    const currentPosition = [0, 0];
+    let currentPosition = [0, 0];
     let nextPosition;
     // The last element in moveArr can only be '' or '{direaction}'
     // Both of them has no effect on the final calculation result
@@ -95,8 +95,7 @@ const getUniqSnapshots = (instructions) => {
     validMoveArr.forEach((move) => {
         // if start with 'x'.
         if (move === '') {
-            nextPosition = currentPosition;
-            box.push(nextPosition);
+            box.push(currentPosition);
         } else {
             nextPosition = handleMove(currentPosition, move);
             // if start with direction and box is empty.
@@ -107,7 +106,8 @@ const getUniqSnapshots = (instructions) => {
                 const isPositionExist = arrayHasElement(box, nextPosition);
                 !isPositionExist && box.push(nextPosition);
             }
-            nextPosition = currentPosition;
+            // Relocation
+            currentPosition = nextPosition;
         }
     });
     return box;
