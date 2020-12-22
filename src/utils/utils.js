@@ -4,9 +4,9 @@
  * @param {String} instructions The instructions string
  */
 const instructionsValidation = (instructions) => {
-	if (!instructions) return false;
-	const regex = /^[\^v<>x]*$/;
-	return regex.test(instructions);
+    if (!instructions) return false;
+    const regex = /^[\^v<>x]*$/;
+    return regex.test(instructions);
 };
 
 /**
@@ -16,17 +16,17 @@ const instructionsValidation = (instructions) => {
  * @param {Array} element The array element
  */
 const arrayHasElement = (array, element) => {
-	for (const el of array) {
-		for (const index in el) {
-			if (el[index] !== element[index]) {
-				break;
-			}
-			if (index == (el.length - 1)) {
-				return true;
-			}
-		}
-	}
-	return false;
+    for (const el of array) {
+        for (const index in el) {
+            if (el[index] !== element[index]) {
+                break;
+            }
+            if (index == (el.length - 1)) {
+                return true;
+            }
+        }
+    }
+    return false;
 };
 
 /**
@@ -35,15 +35,15 @@ const arrayHasElement = (array, element) => {
  * @param {Array} matrix The 2D array
  */
 const unique = (matrix) => {
-	const res = [];
-	matrix.forEach((item) => {
-		res[item] = item;
-	});
-	return Object.values(res);
+    const res = [];
+    matrix.forEach((item) => {
+        res[item] = item;
+    });
+    return Object.values(res);
 };
 
 module.exports = {
-	instructionsValidation,
-	arrayHasElement,
-	unique,
+    instructionsValidation,
+    arrayHasElement,
+    unique,
 };

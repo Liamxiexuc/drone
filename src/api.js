@@ -23,7 +23,7 @@ process.on('unhandledRejection', (e) => {
 const app = express();
 
 const morganLog =
-	process.env.NODE_ENV === 'production' ? morgan('common') : morgan('dev');
+    process.env.NODE_ENV === 'production' ? morgan('common') : morgan('dev');
 
 app.use(helmet());
 app.use(morganLog);

@@ -1,11 +1,11 @@
 const {
     handleMove,
     removeDuplicateX,
-	getUniqSnapshots,
+    getUniqSnapshots,
     instructionsSplit,
-	mergeSnapshotsBox,
-	getSingleDroneSnapshots,
-	getTwoDroneSnapshots,
+    mergeSnapshotsBox,
+    getSingleDroneSnapshots,
+    getTwoDroneSnapshots,
 } = require('../src/controllers/snapshot');
 
 describe('handleMove function', () => {
@@ -40,84 +40,84 @@ describe('handleMove function', () => {
 });
 
 describe('removeDuplicateX function', () => {
-	it('should get the same value when there is no x in string', () => {
-		const string = 'v<>';
+    it('should get the same value when there is no x in string', () => {
+        const string = 'v<>';
 
-		expect(removeDuplicateX(string)).toBe(string);
-	});
+        expect(removeDuplicateX(string)).toBe(string);
+    });
 
-	it('should get the same value when there is no consecutive x in string', () => {
-		const string = 'xvx<x>x';
+    it('should get the same value when there is no consecutive x in string', () => {
+        const string = 'xvx<x>x';
 
-		expect(removeDuplicateX(string)).toBe(string);
-	});
+        expect(removeDuplicateX(string)).toBe(string);
+    });
 
-	it('should properly remove consecutive duplicate x in string', () => {
-		const string = 'xxvxxxxxx<x>xx';
+    it('should properly remove consecutive duplicate x in string', () => {
+        const string = 'xxvxxxxxx<x>xx';
 
-		expect(removeDuplicateX(string)).toBe('xvx<x>x');
-	});
+        expect(removeDuplicateX(string)).toBe('xvx<x>x');
+    });
 });
 
 describe('getUniqSnapshots function', () => {
-	it('should get empty array when there is no x in instruction', () => {
-		const instruction = 'v<>';
+    it('should get empty array when there is no x in instruction', () => {
+        const instruction = 'v<>';
 
-		expect(getUniqSnapshots(instruction)).toEqual([]);
-	});
+        expect(getUniqSnapshots(instruction)).toEqual([]);
+    });
 
-	it('should get correct photos position array when there is a x in instruction', () => {
-		const instruction = 'vx<>';
+    it('should get correct photos position array when there is a x in instruction', () => {
+        const instruction = 'vx<>';
 
-		expect(getUniqSnapshots(instruction)).toEqual([[0, -1]]);
-	});
+        expect(getUniqSnapshots(instruction)).toEqual([[0, -1]]);
+    });
 
-	it('should get correct photos position array when there is a x in instruction', () => {
-		const instruction = 'xvx<>';
+    it('should get correct photos position array when there is a x in instruction', () => {
+        const instruction = 'xvx<>';
 
-		expect(getUniqSnapshots(instruction)).toEqual([[0, 0], [0, -1]]);
-	});
+        expect(getUniqSnapshots(instruction)).toEqual([[0, 0], [0, -1]]);
+    });
 });
 
 describe('instructionsSplit function', () => {
-	it('should properly split the instruction strings of even characters and store as a object', () => {
-		const string = 'xvx^';
+    it('should properly split the instruction strings of even characters and store as a object', () => {
+        const string = 'xvx^';
 
-		expect(instructionsSplit(string)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v^' });
-	});
+        expect(instructionsSplit(string)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v^' });
+    });
 
-	it('should properly split the instruction string of odd characters and store as a object', () => {
-		const string = 'xvx';
+    it('should properly split the instruction string of odd characters and store as a object', () => {
+        const string = 'xvx';
 
-		expect(instructionsSplit(string)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v' });
-	});
+        expect(instructionsSplit(string)).toEqual({ firstInstructions: 'xx', secondInstructions: 'v' });
+    });
 });
 
 describe('mergeSnapshotsBox function', () => {
-	it('should merge two matrix', () => {
-		const firstArr = [
-			[0, 0],
-		];
-		const secondArr = [
-			[1, 1],
-		];
+    it('should merge two matrix', () => {
+        const firstArr = [
+            [0, 0],
+        ];
+        const secondArr = [
+            [1, 1],
+        ];
 
-		expect(mergeSnapshotsBox(firstArr, secondArr)).toEqual([[0, 0], [1, 1]]);
-	});
+        expect(mergeSnapshotsBox(firstArr, secondArr)).toEqual([[0, 0], [1, 1]]);
+    });
 });
 
 describe('getSingleDroneSnapshots function', () => {
-	it('should properly get Single Drone Snapshots', () => {
-		const instructions = 'xvxv';
+    it('should properly get Single Drone Snapshots', () => {
+        const instructions = 'xvxv';
 
-		expect(getSingleDroneSnapshots(instructions)).toEqual([[0, 0], [0, -1]]);
-	});
+        expect(getSingleDroneSnapshots(instructions)).toEqual([[0, 0], [0, -1]]);
+    });
 });
 
 describe('getTwoDroneSnapshots function', () => {
-	it('should properly get Two Drone Snapshots', () => {
-		const instructions = 'xvxv';
+    it('should properly get Two Drone Snapshots', () => {
+        const instructions = 'xvxv';
 
-		expect(getTwoDroneSnapshots(instructions)).toEqual([[0, 0]]);
-	});
+        expect(getTwoDroneSnapshots(instructions)).toEqual([[0, 0]]);
+    });
 });
